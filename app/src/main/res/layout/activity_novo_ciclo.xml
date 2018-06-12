@@ -1,0 +1,387 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".NovoCiclo">
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_scrollFlags="scroll"
+        tools:context=".NovoCiclo">
+
+        <TextView
+            android:id="@+id/tipoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:text="Tipo de roupa"
+            android:textColor="@color/preto70"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nomenovociclo" />
+
+        <TextView
+            android:id="@+id/molhoText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Tempo de Molho"
+            android:textColor="@color/preto70"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/tipoText"
+            app:layout_constraintTop_toBottomOf="@+id/tipoDeRoupa" />
+
+        <TextView
+            android:id="@+id/nivelText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="Nível da Água"
+            android:textColor="@color/preto70"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/tipoText"
+            app:layout_constraintTop_toBottomOf="@+id/temperatura" />
+
+        <RadioGroup
+            android:id="@+id/tipoDeRoupa"
+            android:layout_width="342dp"
+            android:layout_height="29dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/tipoText"
+            app:layout_constraintTop_toBottomOf="@+id/tipoText">
+
+            <RadioButton
+                android:id="@+id/rbDelicado"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Delicado"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rbDiaDia"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Dia-a-dia"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rbPesado"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Pesado"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/tempoDeMolho"
+            android:layout_width="342dp"
+            android:layout_height="29dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/tipoText"
+            app:layout_constraintTop_toBottomOf="@+id/molhoText">
+
+            <RadioButton
+                android:id="@+id/rbCurto"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Curto"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rbMedio"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Médio"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rbLongo"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Longo"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/tempoSecar"
+            android:layout_width="342dp"
+            android:layout_height="29dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/tipoText"
+            app:layout_constraintTop_toBottomOf="@+id/swSecar">
+
+            <RadioButton
+                android:id="@+id/rb20min"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="20 min"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rb40min"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="40 min"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rb60min"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="60 min"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/temperatura"
+            android:layout_width="342dp"
+            android:layout_height="29dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            app:layout_constraintStart_toStartOf="@+id/tipoText"
+            app:layout_constraintTop_toBottomOf="@+id/tempoSecar">
+
+            <RadioButton
+                android:id="@+id/rbtemp50"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="50 ºC"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rbtemp60"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="60 ºC"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rbtemp70"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="70 ºC"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/rgCentrifuga"
+            android:layout_width="342dp"
+            android:layout_height="29dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="16dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tipoText"
+            app:layout_constraintTop_toBottomOf="@+id/swCentrifugar">
+
+            <RadioButton
+                android:id="@+id/rbrpm1"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Devagar"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rbrpm2"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Rápido"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rbrpm3"
+                android:layout_width="114dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Turbo"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+        </RadioGroup>
+
+        <RadioGroup
+            android:id="@+id/nivelAgua"
+            android:layout_width="342dp"
+            android:layout_height="29dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="@+id/tipoText"
+            app:layout_constraintTop_toBottomOf="@+id/nivelText">
+
+            <RadioButton
+                android:id="@+id/rbnivelBaixo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Baixo"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rbnivelMedio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Médio"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+
+            <RadioButton
+                android:id="@+id/rbnivelAlto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Alto"
+                android:textColor="@color/preto70"
+                android:textSize="14sp" />
+        </RadioGroup>
+
+        <EditText
+            android:id="@+id/nomenovociclo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:gravity="center_horizontal"
+            android:hint="Nome"
+            android:inputType="text|textPersonName"
+            android:selectAllOnFocus="true"
+            android:singleLine="true"
+            android:text="Nome"
+            android:textColor="@color/preto70"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carousel"
+            app:layout_optimizationLevel="none" />
+
+        <Button
+            android:id="@+id/salvar"
+            android:layout_width="107dp"
+            android:layout_height="58dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/colorAccent"
+            android:text="Salvar"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/nivelAgua" />
+
+        <in.goodiebag.carouselpicker.CarouselPicker
+            android:id="@+id/carousel"
+            android:alpha = "0.7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/transparente"
+            app:items_visible="three"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Switch
+            android:id="@+id/swSecar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:checked="true"
+            android:text="Secar    "
+            android:textColor="@color/preto70"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/molhoText"
+            app:layout_constraintTop_toBottomOf="@+id/rgCentrifuga" />
+
+        <Switch
+            android:id="@+id/swCentrifugar"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="16dp"
+            android:checked="true"
+            android:text="Centrifugar    "
+            android:textColor="@color/preto70"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="@+id/tipoText"
+            app:layout_constraintTop_toBottomOf="@+id/tempoDeMolho" />
+
+        <Switch
+            android:id="@+id/swAutomatico"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="24dp"
+            android:layout_marginStart="24dp"
+            android:checked="true"
+            android:text="Automático    "
+            android:textColor="@color/preto70"
+            app:layout_constraintBottom_toBottomOf="@+id/nivelText"
+            app:layout_constraintStart_toEndOf="@+id/nivelText"
+            app:layout_constraintTop_toTopOf="@+id/nivelText" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

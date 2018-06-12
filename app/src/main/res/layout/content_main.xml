@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".MainActivity"
+    tools:showIn="@layout/app_bar_main">
+
+        <in.goodiebag.carouselpicker.CarouselPicker
+            android:id="@+id/carousel"
+            android:alpha = "0.7"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:background="@color/transparente"
+            app:items_visible="three"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/FABnovociclo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="8dp"
+            android:clickable="true"
+            android:tint="@android:color/background_light"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:elevation="0dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="@+id/barraprogresso"
+            app:layout_constraintEnd_toEndOf="@+id/barraprogresso"
+            app:layout_constraintTop_toBottomOf="@+id/barraprogresso"
+            app:srcCompat="@drawable/ic_add_black_48dp" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/FABagendar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginStart="8dp"
+            android:clickable="true"
+            android:tint="@android:color/background_light"
+            app:backgroundTint="@color/colorPrimaryDark"
+            app:elevation="0dp"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="@+id/barraprogresso"
+            app:layout_constraintStart_toStartOf="@+id/barraprogresso"
+            app:layout_constraintTop_toBottomOf="@+id/barraprogresso"
+            app:srcCompat="@drawable/ic_alarm_add_black_48dp" />
+
+        <ProgressBar
+            android:id="@+id/barraprogresso"
+            style="@android:style/Widget.ProgressBar.Horizontal"
+            android:layout_width="288dp"
+            android:layout_height="299dp"
+            android:layout_marginBottom="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/circle"
+            android:indeterminate="false"
+            android:max="1000"
+            android:progressDrawable="@drawable/progress_bar"
+            android:visibility="visible"
+            app:layout_constraintBottom_toTopOf="@+id/iniciar"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.511"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textociclo"
+            tools:visibility="visible" />
+
+        <TextView
+            android:id="@+id/tempo"
+            android:layout_width="wrap_content"
+            android:layout_height="105dp"
+            android:layout_marginBottom="24dp"
+            android:text="1:60"
+            android:textColor="@color/preto60"
+            android:textSize="90sp"
+            android:textStyle="normal"
+            app:fontFamily="@font/roboto_thin"
+            app:layout_constraintBottom_toBottomOf="@+id/barraprogresso"
+            app:layout_constraintEnd_toEndOf="@+id/barraprogresso"
+            app:layout_constraintStart_toStartOf="@+id/barraprogresso"
+            app:layout_constraintTop_toTopOf="@+id/barraprogresso" />
+
+        <TextView
+            android:id="@+id/min"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:text="min"
+            android:textColor="@color/preto70"
+            android:textSize="30sp"
+            app:fontFamily="@font/roboto_light"
+            app:layout_constraintEnd_toEndOf="@+id/tempo"
+            app:layout_constraintStart_toStartOf="@+id/tempo"
+            app:layout_constraintTop_toBottomOf="@+id/tempo" />
+
+        <TextView
+            android:id="@+id/textociclo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="Econômico"
+            android:textSize="14sp"
+            app:fontFamily="@font/roboto_light"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/carousel" />
+
+        <Button
+            android:id="@+id/iniciar"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:layout_width="wrap_content"
+            android:layout_height="57dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:text="Iniciar"
+            android:textColor="@android:color/background_light"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

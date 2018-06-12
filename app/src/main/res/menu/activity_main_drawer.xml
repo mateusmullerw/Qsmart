@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group
+        android:id="@+id/menu_top"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/ciclos"
+            android:icon="@drawable/outline_local_laundry_service_black_48dp"
+            android:title="Ciclos" />
+        <item
+            android:id="@+id/limpeza"
+            android:icon="@drawable/outline_autorenew_black_48dp"
+            android:title="Limpeza" />
+        <item
+            android:id="@+id/consumo"
+            android:icon="@drawable/ic_show_chart_black_48dp"
+            android:title="Consumo" />
+        <item
+            android:id="@+id/manual"
+            android:icon="@drawable/outline_library_books_black_48dp"
+            android:title="Manual" />
+    </group>
+
+    <group
+        android:id="@+id/menu_bottom"
+        android:checkableBehavior="single">
+             <item
+            android:id="@+id/manutencao"
+            android:icon="@drawable/outline_build_black_48dp"
+            android:title="Manutenção" />
+
+            <item
+                android:id="@+id/minhaconta"
+                android:icon="@drawable/outline_account_circle_black_48dp"
+                android:title="Minha Conta" />
+    </group>
+
+</menu>

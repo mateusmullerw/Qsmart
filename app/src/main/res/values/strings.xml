@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Qsmart</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Usuário</string>
+    <string name="nav_header_subtitle">usuario@gmail.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="novociclo">Novo Ciclo</string>
+    <string name="agendaciclo">Agendar</string>
+    <string name="consumo">Consumo</string>
+    <string name="limpeza">Limpeza</string>
+    <string name="manual">Manual</string>
+    <string name="manutencao">Manutenção</string>
+    <string name="ciclos">Ciclos</string>
+    <string name="minhaconta">Minha Conta</string>
+    <string name="login">Login</string>
+</resources>

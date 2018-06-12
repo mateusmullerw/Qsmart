@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#389bfb</color>
+    <color name="colorPrimaryDark">#2977de</color>
+    <color name="colorAccent">#39dcdd</color>
+    <color name="transparente">#00000000</color>
+    <color name ="preto10">#19000000</color>
+    <color name ="preto20">#33000000</color>
+    <color name ="preto30">#4c000000</color>
+    <color name ="preto40">#66000000</color>
+    <color name ="preto50">#7f000000</color>
+    <color name ="preto60">#99000000</color>
+    <color name ="preto70">#b4000000</color>
+    <color name ="preto80">#cc000000</color>
+    <color name="colorTextAccent">#389bfb</color>
+</resources>
