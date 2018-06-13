@@ -3,7 +3,9 @@ package com.mateusmuller.qsmart;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -69,11 +71,6 @@ public class NovoCiclo extends AppCompatActivity {
 
 
     int tempoTotal;
-    int tempoMolho;
-    int velocidade;
-    int tempoCentrifuga;
-    //int temperatura;
-    //int tempoSecar;
     int icone;
     String propriedades = "";
     int numCiclo;
@@ -133,17 +130,13 @@ public class NovoCiclo extends AppCompatActivity {
         CarouselPicker carouselPicker = (CarouselPicker) findViewById(R.id.carousel);
 
         List<CarouselPicker.PickerItem> imageItems = new ArrayList<>();
-        imageItems.add(new CarouselPicker.DrawableItem(R.drawable.q0));
-        imageItems.add(new CarouselPicker.DrawableItem(R.drawable.q1));
-        imageItems.add(new CarouselPicker.DrawableItem(R.drawable.q2));
-        imageItems.add(new CarouselPicker.DrawableItem(R.drawable.q3));
-        imageItems.add(new CarouselPicker.DrawableItem(R.drawable.q4));
-        imageItems.add(new CarouselPicker.DrawableItem(R.drawable.q5));
-        imageItems.add(new CarouselPicker.DrawableItem(R.drawable.q6));
-        imageItems.add(new CarouselPicker.DrawableItem(R.drawable.q7));
-        imageItems.add(new CarouselPicker.DrawableItem(R.drawable.q8));
-        imageItems.add(new CarouselPicker.DrawableItem(R.drawable.q9));
-        imageItems.add(new CarouselPicker.DrawableItem(R.drawable.q10));
+        int x;
+        for (x = 0; x<=31; x++){
+            String icone = "p" + Integer.toString(x);
+            int id = getResources().getIdentifier(icone, "drawable", getPackageName());
+            imageItems.add(new CarouselPicker.DrawableItem(id));
+        }
+
         CarouselPicker.CarouselViewAdapter imageAdapter = new CarouselPicker.CarouselViewAdapter(this, imageItems, 0);
         carouselPicker.setAdapter(imageAdapter);
 
@@ -291,13 +284,13 @@ public class NovoCiclo extends AppCompatActivity {
                 } else {
                     switch (checkedRadioButtonId) {
                         case R.id.rbnivelBaixo:
-                            propriedades = propriedades + "1";
+                            propriedades = propriedades + "1\n";
                             break;
                         case R.id.rbnivelMedio:
-                            propriedades = propriedades + "2";
+                            propriedades = propriedades + "2\n";
                             break;
                         case R.id.rbnivelAlto:
-                            propriedades = propriedades + "3";
+                            propriedades = propriedades + "3\n";
                             break;
                     }
                 }
@@ -311,7 +304,7 @@ public class NovoCiclo extends AppCompatActivity {
             }
             propriedades = propriedades + Integer.toString(tempoTotal * 1000);
             numCiclo++;
-            SharedPreferencesManager.salvaCiclo(propriedades, numCiclo, context);
+            PropiedadesCiclo.salvaCiclo(propriedades, numCiclo, context);
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             }

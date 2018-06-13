@@ -12,7 +12,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -89,7 +89,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".MinhaConta"
+        <activity
+            android:name=".MinhaConta"
             android:label="@string/minhaconta"
             android:parentActivityName=".MainActivity">
 
@@ -98,7 +99,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".MainActivity" />
         </activity>
-        <activity android:name=".Manual"
+        <activity
+            android:name=".Manual"
             android:label="@string/manual"
             android:parentActivityName=".MainActivity">
 
@@ -112,4 +114,5 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
     </application>
+
 </manifest>

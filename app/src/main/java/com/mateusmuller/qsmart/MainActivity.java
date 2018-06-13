@@ -30,12 +30,12 @@ import junit.framework.Assert;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 import in.goodiebag.carouselpicker.CarouselPicker;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
 
     //Context
     Context context = this;
@@ -60,9 +60,9 @@ public class MainActivity extends AppCompatActivity
     List<CarouselPicker.PickerItem> imageItems = new ArrayList<>();
 
     //Ciclo Pré Salvos
-    String ciclo0 = "3\nCalças\n3\n3\n2\n3\n2\n0\n145000";
-    String ciclo1 = "2\nAlgodão\n2\n2\n2\n2\n2\n0\n110000";
-    String ciclo2 = "5\nRoupa Íntima\n1\n2\n1\n2\n1\n0\n110000";
+    String ciclo0 = "1\nPesado\n3\n3\n2\n3\n2\n0\n145000";
+    String ciclo1 = "0\nDia a dia\n2\n2\n2\n2\n2\n0\n110000";
+    String ciclo2 = "2\nDelicado\n1\n2\n1\n2\n1\n0\n110000";
 
     //Variáveis
     String proprilines[];
@@ -91,6 +91,7 @@ public class MainActivity extends AppCompatActivity
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme_NoActionBar);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -110,10 +111,10 @@ public class MainActivity extends AppCompatActivity
         SharedPreferences mSharedPreferences = getSharedPreferences("Login", MODE_PRIVATE);
         int loginFlag = mSharedPreferences.getInt("loginFlag", 0);
         if (loginFlag == 0){
-            SharedPreferencesManager.salvaCiclo(ciclo0, 0, context);
-            SharedPreferencesManager.salvaCiclo(ciclo1, 1,context);
-            SharedPreferencesManager.salvaCiclo(ciclo2, 2,context);
-            SharedPreferencesManager.salvaPosition(1,context);
+            PropiedadesCiclo.salvaCiclo(ciclo0, 0, context);
+            PropiedadesCiclo.salvaCiclo(ciclo1, 1,context);
+            PropiedadesCiclo.salvaCiclo(ciclo2, 2,context);
+            PropiedadesCiclo.salvaPosition(1,context);
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
         }
@@ -142,8 +143,8 @@ public class MainActivity extends AppCompatActivity
         int numCiclo = mSharedPreferences.getInt("numCiclo", 0);
         String icone;
         for (int x = 0; x <= numCiclo; x ++) {
-            proprilines = SharedPreferencesManager.getCiclo(x, context);
-            icone = "q" + proprilines[0];
+            proprilines = PropiedadesCiclo.getCiclo(x, context);
+            icone = "p" + proprilines[0];
             int id = getDrawable(this, icone);
             imageItems.add(new CarouselPicker.DrawableItem(id));
         }
@@ -155,17 +156,16 @@ public class MainActivity extends AppCompatActivity
         carouselPicker.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                // String[] proprilines = getCiclo(position);
-                //textociclo.setText(proprilines[1]);
+
             }
 
             @Override
             public void onPageSelected(int position) {
-                proprilines = SharedPreferencesManager.getCiclo(position, context);
+                proprilines = PropiedadesCiclo.getCiclo(position, context);
                 textociclo.setText(proprilines[1]);
                 tempoTotal  = Integer.parseInt(proprilines[8]);
                 mostraTempo();
-                SharedPreferencesManager.salvaPosition(position,context);
+                PropiedadesCiclo.salvaPosition(position,context);
             }
 
             @Override
@@ -308,7 +308,7 @@ public class MainActivity extends AppCompatActivity
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void restoreCarousel(){
         carouselPicker.setCurrentItem(position);
-        proprilines = SharedPreferencesManager.getCiclo(position, context);
+        proprilines = PropiedadesCiclo.getCiclo(position, context);
         textociclo.setText(proprilines[1]);
         tempoTotal = Integer.parseInt(proprilines[8]);
         mostraTempo();
@@ -322,16 +322,9 @@ public class MainActivity extends AppCompatActivity
     }
 
 
-    public String milliFormat (int tempo_total) {
-
-        String tempoMostrador = String.format("%01d:%02d",
-                TimeUnit.MILLISECONDS.toMinutes(tempo_total) % TimeUnit.HOURS.toMinutes(1),
-                TimeUnit.MILLISECONDS.toSeconds(tempo_total) % TimeUnit.MINUTES.toSeconds(1));
-        return tempoMostrador;
-    }
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void mostraTempo(){
-        tempo.setText(milliFormat(tempoTotal));
+        tempo.setText(PropiedadesCiclo.milliFormat(tempoTotal));
         if (tempoTotal == 0){
             timer.cancel();
             restoreCarousel();

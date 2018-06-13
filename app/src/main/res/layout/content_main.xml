@@ -84,6 +84,7 @@
             android:textColor="@color/preto60"
             android:textSize="90sp"
             android:textStyle="normal"
+            android:typeface="monospace"
             app:fontFamily="@font/roboto_thin"
             app:layout_constraintBottom_toBottomOf="@+id/barraprogresso"
             app:layout_constraintEnd_toEndOf="@+id/barraprogresso"
