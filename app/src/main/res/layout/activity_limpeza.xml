@@ -105,6 +105,7 @@
         android:layout_marginRight="8dp"
         android:layout_marginStart="8dp"
         android:text="Iniciar"
+        android:background="@drawable/button"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"

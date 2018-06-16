@@ -120,7 +120,7 @@ public class NovoCiclo extends AppCompatActivity {
         nivelAlto = findViewById(R.id.rbnivelAlto);
 
         //Animações
-        Animopen = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.button_show);
+        Animopen = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rgopen);
         Animclose = AnimationUtils.loadAnimation(getApplicationContext(), R.anim.rgclose);
 
         SharedPreferences mSharedPreferences = getSharedPreferences("ciclos", MODE_PRIVATE);

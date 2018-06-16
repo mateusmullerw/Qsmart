@@ -16,5 +16,11 @@
     <string name="minhaconta">Minha Conta</string>
     <string name="login">Login</string>
     <string name="iconsCreator">Bernar Novalyi</string>
+    <string-array name="time_graph">
+        <item>Dias</item>
+        <item>Semanas</item>
+        <item>Meses</item>
+        <item>Anos</item>
+    </string-array>
 
 </resources>

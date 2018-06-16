@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:animateLayoutChanges="true"
     tools:context=".NovoCiclo">
 
     <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -318,14 +319,14 @@
         <Button
             android:id="@+id/salvar"
             android:layout_width="107dp"
-            android:layout_height="58dp"
+            android:layout_height="48dp"
             android:layout_marginBottom="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginLeft="8dp"
             android:layout_marginRight="8dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:backgroundTint="@color/colorAccent"
+            android:background="@drawable/button"
             android:text="Salvar"
             android:textColor="@android:color/background_light"
             android:textSize="18sp"
