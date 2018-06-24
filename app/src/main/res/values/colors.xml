@@ -12,5 +12,6 @@
     <color name ="preto60">#99000000</color>
     <color name ="preto70">#b4000000</color>
     <color name ="preto80">#cc000000</color>
+    <color name ="vermelho">#d64040</color>
     <color name="colorTextAccent">#389bfb</color>
 </resources>

@@ -1,13 +1,19 @@
 package com.mateusmuller.qsmart;
 
+import android.Manifest;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -23,8 +29,10 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LinearInterpolator;
 import android.widget.Button;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import junit.framework.Assert;
 
@@ -50,6 +58,7 @@ public class MainActivity extends AppCompatActivity
 
     TextView tempo;
     ProgressBar barraprogresso;
+    ImageView wifiOff;
 
     FloatingActionButton agendar;
     FloatingActionButton novociclo;
@@ -71,6 +80,10 @@ public class MainActivity extends AppCompatActivity
     boolean open = false;
     int tempoTotal;
     int progresso;
+
+    //NETWORK
+    private ConnectivityManager mConnMgr;
+    public NetworkReceiver mReceiver;
 
 
     //timer - substituir
@@ -118,6 +131,14 @@ public class MainActivity extends AppCompatActivity
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
         }
+        //NETWORK
+        mConnMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        mReceiver = new NetworkReceiver();
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(mReceiver, filter);
+
+
+
 
 
         //Animações
@@ -129,6 +150,7 @@ public class MainActivity extends AppCompatActivity
 
         tempo = findViewById(R.id.tempo);
         barraprogresso = findViewById(R.id.barraprogresso);
+        wifiOff = findViewById(R.id.wifiOff);
 
         agendar = findViewById(R.id.FABagendar);
         novociclo = findViewById(R.id.FABnovociclo);
@@ -216,12 +238,8 @@ public class MainActivity extends AppCompatActivity
         agendar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                SharedPreferences mSharedPreferences = getSharedPreferences("Login", MODE_PRIVATE);
-                SharedPreferences.Editor editor = mSharedPreferences.edit();
-                editor.clear();
-                editor.commit();
-                //Intent intent = new Intent(getApplicationContext(), AgendaCiclo.class);
-                //startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), AgendaCiclo.class);
+                startActivity(intent);
             }
         });
     }
@@ -255,7 +273,6 @@ public class MainActivity extends AppCompatActivity
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
 
-            /* usar somente wifi ou 3g e wifi*/
             return true;
         }
 
@@ -364,6 +381,52 @@ public class MainActivity extends AppCompatActivity
         }else{
             anim.cancel();
 
+        }
+    }
+    //NETWORK
+    public class NetworkReceiver extends BroadcastReceiver {
+
+        @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+        @Override
+        public void onReceive(Context context, Intent intent) {
+
+            NetworkInfo networkInfo = mConnMgr.getActiveNetworkInfo();
+
+            if(networkInfo != null){
+
+                boolean isWiFiAvailable = mConnMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
+                boolean isGSMAvailable = mConnMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected();
+                if (isWiFiAvailable){
+                    Toast.makeText(context, "Conectado", Toast.LENGTH_SHORT).show();
+                    barraprogresso.setBackground(getDrawable(R.drawable.circle));
+                    wifiOff.startAnimation(FABclose);
+                    wifiOff.setVisibility(View.INVISIBLE);
+
+
+                }else if (isGSMAvailable){
+                    Toast.makeText(context, "Conectado", Toast.LENGTH_SHORT).show();
+                    barraprogresso.setBackground(getDrawable(R.drawable.circle));
+                    wifiOff.startAnimation(FABclose);
+                    wifiOff.setVisibility(View.INVISIBLE);
+                }else{
+                    Toast.makeText(context, "Desconectado", Toast.LENGTH_SHORT).show();
+                    barraprogresso.setBackground(getDrawable(R.drawable.circulo_vermelho));
+                    wifiOff.startAnimation(FABopen);
+                    wifiOff.setVisibility(View.VISIBLE);
+                }
+            }else{
+                Toast.makeText(context, "Desconectado", Toast.LENGTH_SHORT).show();
+                barraprogresso.setBackground(getDrawable(R.drawable.circulo_vermelho));
+                wifiOff.startAnimation(FABopen);
+                wifiOff.setVisibility(View.VISIBLE);
+            }
+        }
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if(mReceiver != null){
+            unregisterReceiver(mReceiver);
         }
     }
 

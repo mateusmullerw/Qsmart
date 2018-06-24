@@ -143,7 +143,16 @@ public class NovoCiclo extends AppCompatActivity {
         Centrifugar.setEnabled(false);
 
         salvar = findViewById(R.id.salvar);
-        //Salvar
+
+        //TEMPOS
+
+        // Tipo             1= 20; 2= 30; 3= 40
+        // Molho            1= 10; 2= 15; 3= 20
+        // Centrifugar      1= 35; 2= 25; 3= 15
+        // Secar            1= 20; 2= 40; 3= 60
+
+
+        // Salvar
         salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
