@@ -39,7 +39,7 @@ public class PropiedadesCiclo {
         SharedPreferences mSharedPreferences = context.getSharedPreferences("ciclos", context.MODE_PRIVATE);
         String ciclo = "ciclo" + Integer.toString(thisCiclo);
         String propriedades = mSharedPreferences.getString(ciclo, "nope");
-        String proprilines[] = propriedades.split("\n");
+        String proprilines[] = propriedades.split("_");
         return proprilines;
     }
     public static void salvaCiclo(String propriedades, int countCiclos, Context context){
@@ -61,10 +61,17 @@ public class PropiedadesCiclo {
         return;
     }
     public static String milliFormat (int tempo_total) {
+        if(tempo_total >= 60000) {
 
-        String tempoMostrador = String.format("%01d:%02d",
-                TimeUnit.MILLISECONDS.toMinutes(tempo_total) % TimeUnit.HOURS.toMinutes(1),
-                TimeUnit.MILLISECONDS.toSeconds(tempo_total) % TimeUnit.MINUTES.toSeconds(1));
-        return tempoMostrador;
+            String tempoMostrador = String.format("%01d:%02d",
+                    TimeUnit.MILLISECONDS.toMinutes(tempo_total) % TimeUnit.HOURS.toMinutes(1),
+                    TimeUnit.MILLISECONDS.toSeconds(tempo_total) % TimeUnit.MINUTES.toSeconds(1));
+            return tempoMostrador;
+        }else{
+            String tempoMostrador = String.format("%02d",
+                    //TimeUnit.MILLISECONDS.toMinutes(tempo_total) % TimeUnit.HOURS.toMinutes(1),
+                    TimeUnit.MILLISECONDS.toSeconds(tempo_total) % TimeUnit.MINUTES.toSeconds(1));
+            return tempoMostrador;
+        }
     }
 }

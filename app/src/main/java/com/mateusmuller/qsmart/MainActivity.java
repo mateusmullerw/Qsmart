@@ -1,6 +1,5 @@
 package com.mateusmuller.qsmart;
 
-import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -13,7 +12,6 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -32,7 +30,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import junit.framework.Assert;
 
@@ -67,19 +64,21 @@ public class MainActivity extends AppCompatActivity
     Button iniciar;
     CarouselPicker carouselPicker;
     List<CarouselPicker.PickerItem> imageItems = new ArrayList<>();
+    ImageView Iicone;
 
     //Ciclo Pré Salvos
-    String ciclo0 = "1\nPesado\n3\n3\n2\n3\n2\n0\n145000";
-    String ciclo1 = "0\nDia a dia\n2\n2\n2\n2\n2\n0\n110000";
-    String ciclo2 = "2\nDelicado\n1\n2\n1\n2\n1\n0\n110000";
+    String ciclo0 = "1_Pesado_3_3_2_3_2_0_145000";
+    String ciclo1 = "0_Dia-a-dia_2_2_2_2_2_0_110000";
+    String ciclo2 = "2_Delicado_1_2_1_2_1_0_110000";
 
     //Variáveis
     String proprilines[];
     int position;
     int onoff = 0;
-    boolean open = false;
+    boolean wifion = false;
     int tempoTotal;
-    int progresso;
+    String request;
+    final String url = "http://192.168.4.1/";
 
     //NETWORK
     private ConnectivityManager mConnMgr;
@@ -147,6 +146,7 @@ public class MainActivity extends AppCompatActivity
 
         //Interface
         textociclo = findViewById(R.id.textociclo);
+        Iicone = findViewById(R.id.icone);
 
         tempo = findViewById(R.id.tempo);
         barraprogresso = findViewById(R.id.barraprogresso);
@@ -173,6 +173,12 @@ public class MainActivity extends AppCompatActivity
         CarouselPicker.CarouselViewAdapter imageAdapter = new CarouselPicker.CarouselViewAdapter(this, imageItems, 0);
         carouselPicker.setAdapter(imageAdapter);
         position = mSharedPreferences.getInt("position", 1);
+        request = url + "=_start_"+proprilines[2]+"_"
+                                +proprilines[3]+"_"
+                                +proprilines[4]+"_"
+                                +proprilines[5]+"_"
+                                +proprilines[6]+"_"
+                                +proprilines[7]+"_fim=";
         restoreCarousel();
 
         carouselPicker.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
@@ -183,6 +189,12 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onPageSelected(int position) {
+                request = url + "=_start_"+proprilines[2]+"_"
+                                          +proprilines[3]+"_"
+                                          +proprilines[4]+"_"
+                                          +proprilines[5]+"_"
+                                          +proprilines[6]+"_"
+                                          +proprilines[7]+"_fim=";
                 proprilines = PropiedadesCiclo.getCiclo(position, context);
                 textociclo.setText(proprilines[1]);
                 tempoTotal  = Integer.parseInt(proprilines[8]);
@@ -201,27 +213,30 @@ public class MainActivity extends AppCompatActivity
         iniciar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (onoff == 0) {
+                if (onoff == 0 && wifion) {
+                    Network.sendRecieve(request);
                     timerStart();
-
-                    iniciar.setText("Pausar");
+                    iniciar.setText("Parar");
                     novociclo.startAnimation(FABclose);
                     agendar.startAnimation(FABclose);
                     novociclo.setVisibility(View.INVISIBLE);
                     agendar.setVisibility(View.INVISIBLE);
+                    carouselPicker.setVisibility(View.INVISIBLE);
+                    Iicone.setVisibility(View.VISIBLE);
                     onoff = 1;
 
                 }
-                else if (onoff == 1) {
+                else if (onoff == 1 && wifion) {
+                    Network.sendRecieve(url + "=_stop_fim=");
                     timer.cancel();
-                    progressAnim(false);
-
-                    barraprogresso.setProgress(0);
+                    progressAnim( 0, 0);
                     iniciar.setText("Iniciar");
                     novociclo.startAnimation(FABopen);
                     agendar.startAnimation(FABopen);
                     novociclo.setVisibility(View.VISIBLE);
                     agendar.setVisibility(View.VISIBLE);
+                    carouselPicker.setVisibility(View.VISIBLE);
+                    Iicone.setVisibility(View.INVISIBLE);
                     onoff = 0;
                 }
 
@@ -334,7 +349,7 @@ public class MainActivity extends AppCompatActivity
     //TIMER
     public void timerStart () {
         timerMetodo(tempoTotal);
-        progressAnim(true);
+        progressAnim( 0, 1000);
         timer.start();
     }
 
@@ -371,17 +386,14 @@ public class MainActivity extends AppCompatActivity
         };
     }
     //ANIMATION
-    public void progressAnim(boolean start){
-        ProgressBarAnimation anim = new ProgressBarAnimation(barraprogresso, 0, 1000);
-        if (start) {
-            anim.setInterpolator(new LinearInterpolator());
-            anim.setDuration(tempoTotal+1800);
-            barraprogresso.startAnimation(anim);
+    public void progressAnim( int from, int to){
+        ProgressBarAnimation anim = new ProgressBarAnimation(barraprogresso, from, to);
 
-        }else{
-            anim.cancel();
+        anim.setInterpolator(new LinearInterpolator());
+        anim.setDuration(tempoTotal+1800);
+        barraprogresso.startAnimation(anim);
 
-        }
+
     }
     //NETWORK
     public class NetworkReceiver extends BroadcastReceiver {
@@ -397,28 +409,32 @@ public class MainActivity extends AppCompatActivity
                 boolean isWiFiAvailable = mConnMgr.getNetworkInfo(ConnectivityManager.TYPE_WIFI).isConnected();
                 boolean isGSMAvailable = mConnMgr.getNetworkInfo(ConnectivityManager.TYPE_MOBILE).isConnected();
                 if (isWiFiAvailable){
-                    Toast.makeText(context, "Conectado", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, "Conectado", Toast.LENGTH_SHORT).show();
                     barraprogresso.setBackground(getDrawable(R.drawable.circle));
                     wifiOff.startAnimation(FABclose);
                     wifiOff.setVisibility(View.INVISIBLE);
+                    wifion = true;
 
 
                 }else if (isGSMAvailable){
-                    Toast.makeText(context, "Conectado", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, "Conectado", Toast.LENGTH_SHORT).show();
                     barraprogresso.setBackground(getDrawable(R.drawable.circle));
                     wifiOff.startAnimation(FABclose);
                     wifiOff.setVisibility(View.INVISIBLE);
+                    wifion = true;
                 }else{
-                    Toast.makeText(context, "Desconectado", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(context, "Desconectado", Toast.LENGTH_SHORT).show();
                     barraprogresso.setBackground(getDrawable(R.drawable.circulo_vermelho));
                     wifiOff.startAnimation(FABopen);
                     wifiOff.setVisibility(View.VISIBLE);
+                    wifion = false;
                 }
             }else{
-                Toast.makeText(context, "Desconectado", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(context, "Desconectado", Toast.LENGTH_SHORT).show();
                 barraprogresso.setBackground(getDrawable(R.drawable.circulo_vermelho));
                 wifiOff.startAnimation(FABopen);
                 wifiOff.setVisibility(View.VISIBLE);
+                wifion = false;
             }
         }
     }

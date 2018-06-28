@@ -7,41 +7,37 @@
     tools:context=".Login">
 
     <Button
-        android:id="@+id/login"
+        android:id="@+id/backlight"
         style="@style/Widget.AppCompat.Button.Colored"
-        android:layout_width="92dp"
+        android:layout_width="276dp"
         android:layout_height="48dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="32dp"
         android:background="@drawable/button"
         android:text="Login"
         android:textColor="@android:color/background_light"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText2" />
+        app:layout_constraintEnd_toEndOf="@+id/tsenha"
+        app:layout_constraintStart_toStartOf="@+id/tsenha"
+        app:layout_constraintTop_toBottomOf="@+id/tsenha" />
 
     <TextView
-        android:id="@+id/textociclo8"
+        android:id="@+id/bsenha"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Senha"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/editText2"
-        app:layout_constraintTop_toBottomOf="@+id/editText4" />
+        app:layout_constraintStart_toStartOf="@+id/tsenha"
+        app:layout_constraintTop_toBottomOf="@+id/tuser" />
 
     <TextView
-        android:id="@+id/textociclo7"
+        android:id="@+id/buser"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:text="E-mail"
+        android:text="Usuário"
         android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="@+id/editText4"
+        app:layout_constraintStart_toStartOf="@+id/tuser"
         app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
     <ImageView
@@ -60,7 +56,7 @@
         app:srcCompat="@drawable/ic_account_circle_black_48dp" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/tsenha"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -72,10 +68,10 @@
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textociclo8" />
+        app:layout_constraintTop_toBottomOf="@+id/bsenha" />
 
     <EditText
-        android:id="@+id/editText4"
+        android:id="@+id/tuser"
         android:layout_width="280dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
@@ -87,6 +83,17 @@
         android:inputType="textEmailAddress"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textociclo7" />
+        app:layout_constraintTop_toBottomOf="@+id/buser" />
+
+    <TextView
+        android:id="@+id/aviso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="*Usuário ou senha incorretos"
+        android:textColor="@color/vermelho"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        app:layout_constraintStart_toStartOf="@+id/tsenha"
+        app:layout_constraintTop_toBottomOf="@+id/tsenha" />
 
 </android.support.constraint.ConstraintLayout>

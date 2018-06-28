@@ -158,8 +158,8 @@ public class NovoCiclo extends AppCompatActivity {
             public void onClick(View view) {
                 tempoTotal = 0;
                 emBranco = false;
-                propriedades = Integer.toString(icone)+ "\n";
-                propriedades = propriedades+nomeciclo.getText()+"\n";
+                propriedades = Integer.toString(icone)+ "_";
+                propriedades = propriedades+nomeciclo.getText()+"_";
             int checkedRadioButtonId = rgTipo.getCheckedRadioButtonId();
             if (checkedRadioButtonId == -1) {
                 tTipo.setTextColor(getResources().getColor(R.color.colorTextAccent));
@@ -171,15 +171,15 @@ public class NovoCiclo extends AppCompatActivity {
             else{
                 switch (checkedRadioButtonId){
                     case R.id.rbDelicado:
-                        propriedades = propriedades+"1\n";
+                        propriedades = propriedades+"1_";
                         tempoTotal = tempoTotal + 20;
                         break;
                     case R.id.rbDiaDia:
-                        propriedades = propriedades+"2\n";
+                        propriedades = propriedades+"2_";
                         tempoTotal = tempoTotal + 30;
                         break;
                     case R.id.rbPesado:
-                        propriedades = propriedades+"3\n";
+                        propriedades = propriedades+"3_";
                         tempoTotal = tempoTotal + 40;
                         break;
                 }
@@ -195,15 +195,15 @@ public class NovoCiclo extends AppCompatActivity {
             else{
                 switch (checkedRadioButtonId){
                     case R.id.rbCurto:
-                        propriedades = propriedades+"1\n";
+                        propriedades = propriedades+"1_";
                         tempoTotal = tempoTotal + 10;
                         break;
                     case R.id.rbMedio:
-                        propriedades = propriedades+"2\n";
+                        propriedades = propriedades+"2_";
                         tempoTotal = tempoTotal + 15;
                         break;
                     case R.id.rbLongo:
-                        propriedades = propriedades+"3\n";
+                        propriedades = propriedades+"3_";
                         tempoTotal = tempoTotal + 20;
                         break;
                 }
@@ -219,22 +219,22 @@ public class NovoCiclo extends AppCompatActivity {
                 } else {
                     switch (checkedRadioButtonId) {
                         case R.id.rbrpm1:
-                            propriedades = propriedades + "1\n";
+                            propriedades = propriedades + "1_";
                             tempoTotal = tempoTotal + 35;
                             break;
                         case R.id.rbrpm2:
-                            propriedades = propriedades + "2\n";
+                            propriedades = propriedades + "2_";
                             tempoTotal = tempoTotal + 25;
                             break;
                         case R.id.rbrpm3:
-                            propriedades = propriedades + "3\n";
+                            propriedades = propriedades + "3_";
                             tempoTotal = tempoTotal + 15;
                             break;
                     }
                 }
             }
             else{
-                propriedades = propriedades + "0\n";
+                propriedades = propriedades + "0_";
             }
             if (Secar.isChecked()) {
                 checkedRadioButtonId = rgTempoSecar.getCheckedRadioButtonId();
@@ -246,15 +246,15 @@ public class NovoCiclo extends AppCompatActivity {
                 } else {
                     switch (checkedRadioButtonId) {
                         case R.id.rb20min:
-                            propriedades = propriedades + "1\n";
+                            propriedades = propriedades + "1_";
                             tempoTotal = tempoTotal + 20;
                             break;
                         case R.id.rb40min:
-                            propriedades = propriedades + "2\n";
+                            propriedades = propriedades + "2_";
                             tempoTotal = tempoTotal + 40;
                             break;
                         case R.id.rb60min:
-                            propriedades = propriedades + "3\n";
+                            propriedades = propriedades + "3_";
                             tempoTotal = tempoTotal + 60;
                             break;
                     }
@@ -268,19 +268,19 @@ public class NovoCiclo extends AppCompatActivity {
                 } else {
                     switch (checkedRadioButtonId) {
                         case R.id.rbtemp50:
-                            propriedades = propriedades + "1\n";
+                            propriedades = propriedades + "1_";
                             break;
                         case R.id.rbtemp60:
-                            propriedades = propriedades + "2\n";
+                            propriedades = propriedades + "2_";
                             break;
                         case R.id.rbtemp70:
-                            propriedades = propriedades + "3\n";
+                            propriedades = propriedades + "3_";
                             break;
                     }
                 }
             }
             else{
-                propriedades = propriedades + "0\n0\n";
+                propriedades = propriedades + "0_0_";
             }
             if (!nivelAutomatico.isChecked()) {
                 checkedRadioButtonId = rgnivelAgua.getCheckedRadioButtonId();
@@ -293,19 +293,19 @@ public class NovoCiclo extends AppCompatActivity {
                 } else {
                     switch (checkedRadioButtonId) {
                         case R.id.rbnivelBaixo:
-                            propriedades = propriedades + "1\n";
+                            propriedades = propriedades + "1_";
                             break;
                         case R.id.rbnivelMedio:
-                            propriedades = propriedades + "2\n";
+                            propriedades = propriedades + "2_";
                             break;
                         case R.id.rbnivelAlto:
-                            propriedades = propriedades + "3\n";
+                            propriedades = propriedades + "3_";
                             break;
                     }
                 }
             }
             else{
-                propriedades = propriedades + "0\n";
+                propriedades = propriedades + "0_";
             }
             if(emBranco){
                 emBranco = false;
