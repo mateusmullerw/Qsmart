@@ -89,10 +89,11 @@ public class Limpeza extends AppCompatActivity {
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void mostraTempo(){
         tempo.setText(PropiedadesCiclo.milliFormat(tempoTotal));
-        //if (tempoTotal == 0){
-        //    timer.cancel();
-        //    barraprogresso.setProgress(0);
-       // }
+        if (tempoTotal == 0){
+            timer.cancel();
+
+            barraprogresso.setProgress(0);
+        }
 
     }
     public void timerMetodo(int totalMilli) {

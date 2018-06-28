@@ -60,6 +60,11 @@ public class PropiedadesCiclo {
         mEditor.apply();
         return;
     }
+    public static int getPosition( Context context) {
+        SharedPreferences mSharedPreferences = context.getSharedPreferences("ciclos", MODE_PRIVATE);
+        int position = mSharedPreferences.getInt("position", 1);
+        return position;
+    }
     public static String milliFormat (int tempo_total) {
         if(tempo_total >= 60000) {
 

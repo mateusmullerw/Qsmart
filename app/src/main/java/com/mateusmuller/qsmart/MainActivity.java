@@ -80,6 +80,7 @@ public class MainActivity extends AppCompatActivity
     String request;
     final String url = "http://192.168.4.1/";
 
+
     //NETWORK
     private ConnectivityManager mConnMgr;
     public NetworkReceiver mReceiver;
@@ -108,6 +109,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
 
         //DRAWER
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -172,14 +174,14 @@ public class MainActivity extends AppCompatActivity
         }
         CarouselPicker.CarouselViewAdapter imageAdapter = new CarouselPicker.CarouselViewAdapter(this, imageItems, 0);
         carouselPicker.setAdapter(imageAdapter);
-        position = mSharedPreferences.getInt("position", 1);
+        restoreCarousel();
         request = url + "=_start_"+proprilines[2]+"_"
                                 +proprilines[3]+"_"
                                 +proprilines[4]+"_"
                                 +proprilines[5]+"_"
                                 +proprilines[6]+"_"
                                 +proprilines[7]+"_fim=";
-        restoreCarousel();
+
 
         carouselPicker.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -189,15 +191,19 @@ public class MainActivity extends AppCompatActivity
 
             @Override
             public void onPageSelected(int position) {
-                request = url + "=_start_"+proprilines[2]+"_"
-                                          +proprilines[3]+"_"
-                                          +proprilines[4]+"_"
-                                          +proprilines[5]+"_"
-                                          +proprilines[6]+"_"
-                                          +proprilines[7]+"_fim=";
+                String cicone;
                 proprilines = PropiedadesCiclo.getCiclo(position, context);
+                request = url + "=_start_"+proprilines[2]+"_"
+                                            +proprilines[3]+"_"
+                                            +proprilines[4]+"_"
+                                            +proprilines[5]+"_"
+                                            +proprilines[6]+"_"
+                                            +proprilines[7]+"_fim=";
+                cicone = "p" + proprilines[0];
+                Iicone.setImageResource(getDrawable(context,cicone));
                 textociclo.setText(proprilines[1]);
                 tempoTotal  = Integer.parseInt(proprilines[8]);
+
                 mostraTempo();
                 PropiedadesCiclo.salvaPosition(position,context);
             }
@@ -228,6 +234,7 @@ public class MainActivity extends AppCompatActivity
                 }
                 else if (onoff == 1 && wifion) {
                     Network.sendRecieve(url + "=_stop_fim=");
+                    restoreCarousel();
                     timer.cancel();
                     progressAnim( 0, 0);
                     iniciar.setText("Iniciar");
@@ -328,7 +335,7 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-    //Carrossel
+
     public static int getDrawable(Context context, String name)
     {
         Assert.assertNotNull(context);
@@ -337,10 +344,12 @@ public class MainActivity extends AppCompatActivity
         return context.getResources().getIdentifier(name,
                 "drawable", context.getPackageName());
     }
+    //Carrossel
     @RequiresApi(api = Build.VERSION_CODES.N)
     public void restoreCarousel(){
-        carouselPicker.setCurrentItem(position);
+        position = PropiedadesCiclo.getPosition(context);
         proprilines = PropiedadesCiclo.getCiclo(position, context);
+        carouselPicker.setCurrentItem(position);
         textociclo.setText(proprilines[1]);
         tempoTotal = Integer.parseInt(proprilines[8]);
         mostraTempo();
@@ -378,8 +387,18 @@ public class MainActivity extends AppCompatActivity
 
             }
 
+            @RequiresApi(api = Build.VERSION_CODES.N)
             public void onFinish() {
-                //notificação=========================
+                restoreCarousel();
+                progressAnim( 0, 0);
+                iniciar.setText("Iniciar");
+                novociclo.startAnimation(FABopen);
+                agendar.startAnimation(FABopen);
+                novociclo.setVisibility(View.VISIBLE);
+                agendar.setVisibility(View.VISIBLE);
+                carouselPicker.setVisibility(View.VISIBLE);
+                Iicone.setVisibility(View.INVISIBLE);
+                onoff = 0;
 
 
             }
